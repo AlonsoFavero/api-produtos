@@ -28,4 +28,10 @@ public class ProdutoController {
 
         return produtoService.listar();
     }
+
+    @GetMapping("/{id}")
+    public Produto buscarPorId(@PathVariable Long id){
+
+        return produtoService.buscarPoId(id);
+    }
 }
