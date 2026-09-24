@@ -4,6 +4,8 @@ import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProdutoService {
 
@@ -17,5 +19,10 @@ public class ProdutoService {
     public Produto salvar(Produto produto){
 
         return produtoRepository.save(produto);
+    }
+
+    public List<Produto> listar(){
+
+        return produtoRepository.findAll();
     }
 }
