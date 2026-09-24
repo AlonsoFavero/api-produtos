@@ -26,8 +26,19 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto buscarPoId(Long id){
+    public Produto buscarPorId(Long id){
 
         return produtoRepository.findById(id).orElseThrow();
+    }
+
+    public Produto atualizar(Long id, Produto produto){
+
+        Produto produtoExistente = produtoRepository.findById(id).orElseThrow();
+
+        produtoExistente.setNome(produto.getNome());
+        produtoExistente.setPreco(produto.getPreco());
+        produtoExistente.setQuantidade(produto.getQuantidade());
+
+        return produtoRepository.save(produtoExistente);
     }
 }
