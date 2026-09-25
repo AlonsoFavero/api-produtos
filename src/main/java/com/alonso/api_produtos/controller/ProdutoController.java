@@ -3,6 +3,7 @@ package com.alonso.api_produtos.controller;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.service.ProdutoService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -45,8 +46,11 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public void excluir (@PathVariable Long id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> excluir (@PathVariable Long id){
 
         produtoService.excluir(id);
+
+       return ResponseEntity.noContent().build();
     }
 }
