@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -21,6 +22,14 @@ public class GlobalExceptionHandler {
 
         }
         return ResponseEntity.badRequest().body(tratarErros);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> tratarNaoEncontrado(NoSuchElementException exception){
+
+        ResponseEntity.notFound();
+
+        return ResponseEntity.notFound().build();
     }
 }
 
