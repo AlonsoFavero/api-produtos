@@ -40,4 +40,10 @@ public class ProdutoController {
 
         return produtoService.atualizar(id,produto);
     }
+
+    @DeleteMapping("/{id}")
+    public void excluir (@PathVariable Long id){
+
+        produtoService.excluir(id);
+    }
 }

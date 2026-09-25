@@ -41,4 +41,11 @@ public class ProdutoService {
 
         return produtoRepository.save(produtoExistente);
     }
+
+    public void excluir(Long id){
+
+        Produto produtoExcluido = produtoRepository.findById(id).orElseThrow();
+
+         produtoRepository.delete(produtoExcluido);
+    }
 }
