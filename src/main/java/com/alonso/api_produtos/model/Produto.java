@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Produto{
@@ -42,8 +44,11 @@ public class Produto{
     @Id
     @GeneratedValue
    private Long id;
+   @NotBlank
    private String nome;
+   @Positive
    private BigDecimal preco;
+   @Positive
    private Integer quantidade;
 
     public Produto(

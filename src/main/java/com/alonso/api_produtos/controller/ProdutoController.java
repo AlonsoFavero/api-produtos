@@ -3,6 +3,7 @@ package com.alonso.api_produtos.controller;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.service.ProdutoService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produto criar (@RequestBody Produto produto){
+    public Produto criar (@Valid @RequestBody Produto produto){
 
         return produtoService.salvar(produto);
     }
