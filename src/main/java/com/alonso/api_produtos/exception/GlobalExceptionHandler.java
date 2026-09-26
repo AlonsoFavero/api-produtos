@@ -27,9 +27,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> tratarNaoEncontrado(NoSuchElementException exception){
 
-        ResponseEntity.notFound();
-
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(404).body("produto não encontrado");
     }
 }
 
