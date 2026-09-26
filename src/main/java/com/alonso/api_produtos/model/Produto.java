@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Entity
@@ -47,8 +48,10 @@ public class Produto{
    @NotBlank
    private String nome;
    @Positive
+   @NotNull
    private BigDecimal preco;
    @Positive
+   @NotNull
    private Integer quantidade;
 
     public Produto(
