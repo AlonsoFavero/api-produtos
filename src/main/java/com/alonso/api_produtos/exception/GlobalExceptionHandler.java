@@ -36,6 +36,12 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body("ID inválido");
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> tratarErroInterno(Exception exception){
+
+        return ResponseEntity.status(500).body("Erro interno no servidor");
+    }
 }
 
 
