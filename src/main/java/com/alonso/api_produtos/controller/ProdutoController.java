@@ -1,5 +1,6 @@
 package com.alonso.api_produtos.controller;
 
+import com.alonso.api_produtos.dto.ProdutoDTO;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,13 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto criar (@Valid @RequestBody Produto produto){
+    public Produto criar (@Valid @RequestBody ProdutoDTO produtoDTO){
+
+        Produto produto = new Produto(
+                produtoDTO.getNome(),
+                produtoDTO.getPreco(),
+                produtoDTO.getQuantidade()
+        );
 
         return produtoService.salvar(produto);
     }
@@ -40,7 +47,14 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id,@Valid @RequestBody Produto produto){
+    public Produto atualizar(@PathVariable Long id,@Valid @RequestBody ProdutoDTO produtoDTO){
+
+        Produto produto = new Produto(
+
+                produtoDTO.getNome(),
+        produtoDTO.getPreco(),
+        produtoDTO.getQuantidade()
+                );
 
         return produtoService.atualizar(id,produto);
     }
