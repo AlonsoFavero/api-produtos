@@ -1,5 +1,6 @@
 package com.alonso.api_produtos.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> tratarNaoEncontrado(NoSuchElementException exception){
 
-        return ResponseEntity.status(404).body("produto não encontrado");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto não encontrado");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> tratarErroInterno(Exception exception){
 
-        return ResponseEntity.status(500).body("Erro interno no servidor");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno no servidor");
     }
 }
 
