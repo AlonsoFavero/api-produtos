@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -28,6 +29,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> tratarNaoEncontrado(NoSuchElementException exception){
 
         return ResponseEntity.status(404).body("produto não encontrado");
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<?> tratarErroDeTipo(MethodArgumentTypeMismatchException exception) {
+
+        return ResponseEntity.badRequest().body("ID inválido");
     }
 }
 
