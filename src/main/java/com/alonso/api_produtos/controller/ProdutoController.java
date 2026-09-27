@@ -1,6 +1,7 @@
 package com.alonso.api_produtos.controller;
 
 import com.alonso.api_produtos.dto.ProdutoDTO;
+import com.alonso.api_produtos.dto.ProdutoResponseDTO;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,15 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listar(){
+    public List<ProdutoResponseDTO> listar(){
 
-        return produtoService.listar();
+        List<Produto> produto = produtoService.listar();
+
+        List<ProdutoResponseDTO> produtosDTO = produto.stream()
+         .map(produtos -> new ProdutoResponseDTO(produtos))
+                .toList();
+
+        return produtosDTO;
     }
 
     @GetMapping("/{id}")
