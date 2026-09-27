@@ -29,12 +29,12 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id){
 
-        return produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("erro"));
+        return produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("produto não encontrado"));
     }
 
     public Produto atualizar(Long id, Produto produto){
 
-        Produto produtoExistente = produtoRepository.findById(id).orElseThrow();
+        Produto produtoExistente = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("produto não encontrado"));
 
         produtoExistente.setNome(produto.getNome());
         produtoExistente.setPreco(produto.getPreco());
@@ -45,7 +45,7 @@ public class ProdutoService {
 
     public void excluir(Long id){
 
-        Produto produtoExcluido = produtoRepository.findById(id).orElseThrow();
+        Produto produtoExcluido = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("produto não encontrado"));
 
          produtoRepository.delete(produtoExcluido);
     }
