@@ -58,16 +58,20 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id,@Valid @RequestBody ProdutoDTO produtoDTO){
+    public ProdutoResponseDTO atualizar(@PathVariable Long id,@Valid @RequestBody ProdutoDTO produtoDTO){
 
         Produto produto = new Produto(
 
                 produtoDTO.getNome(),
-        produtoDTO.getPreco(),
-        produtoDTO.getQuantidade()
-                );
+                produtoDTO.getPreco(),
+                produtoDTO.getQuantidade()
+        );
 
-        return produtoService.atualizar(id,produto);
+        ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO(produto);
+
+        Produto produtoAtualizado = produtoService.atualizar(id, produto);
+
+        return produtoResponseDTO;
     }
 
     @DeleteMapping("/{id}")
