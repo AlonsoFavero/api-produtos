@@ -1,5 +1,6 @@
 package com.alonso.api_produtos.service;
 
+import com.alonso.api_produtos.exception.ProdutoNotFoundException;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id){
 
-        return produtoRepository.findById(id).orElseThrow();
+        return produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("erro"));
     }
 
     public Produto atualizar(Long id, Produto produto){
