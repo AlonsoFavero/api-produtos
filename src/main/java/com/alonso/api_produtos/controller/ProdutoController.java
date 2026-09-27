@@ -24,7 +24,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto criar (@Valid @RequestBody ProdutoDTO produtoDTO){
+    public ProdutoResponseDTO criar (@Valid @RequestBody ProdutoDTO produtoDTO){
 
         Produto produto = new Produto(
                 produtoDTO.getNome(),
@@ -32,7 +32,11 @@ public class ProdutoController {
                 produtoDTO.getQuantidade()
         );
 
-        return produtoService.salvar(produto);
+        Produto produtoCriar = produtoService.salvar(produto);
+
+        ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO(produtoCriar);
+
+        return produtoResponseDTO;
     }
 
     @GetMapping
@@ -67,9 +71,9 @@ public class ProdutoController {
                 produtoDTO.getQuantidade()
         );
 
-        ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO(produto);
-
         Produto produtoAtualizado = produtoService.atualizar(id, produto);
+
+        ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO(produtoAtualizado);
 
         return produtoResponseDTO;
     }
