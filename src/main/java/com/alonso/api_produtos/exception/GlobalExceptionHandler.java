@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProdutoNotFoundException.class)
     public ResponseEntity<?> produtoNaoEncontrado(ProdutoNotFoundException produtoNotFoundException){
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(produtoNotFoundException.getMessage());
     }
 }
 
