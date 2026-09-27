@@ -48,9 +48,13 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public Produto buscarPorId(@PathVariable Long id){
+    public ProdutoResponseDTO buscarPorId(@PathVariable Long id){
 
-        return produtoService.buscarPorId(id);
+        Produto produto = produtoService.buscarPorId(id);
+
+        ProdutoResponseDTO produtoDTO = new ProdutoResponseDTO(produto);
+
+        return produtoDTO;
     }
 
     @PutMapping("/{id}")
