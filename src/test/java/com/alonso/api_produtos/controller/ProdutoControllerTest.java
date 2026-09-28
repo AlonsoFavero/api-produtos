@@ -134,4 +134,16 @@ public class ProdutoControllerTest {
                 status().isBadRequest()
         );
     }
+
+    @Test
+    void deveRetornar400AoCriarProdutoSemPreco() throws Exception{
+
+        mockMvc.perform(
+                post("/produtos")
+                        .contentType("application/json")
+                        .content("{\"nome\":\"Mouse\",\"quantidade\":5}")
+        ).andExpect(
+                status().isBadRequest()
+        );
+    }
 }
