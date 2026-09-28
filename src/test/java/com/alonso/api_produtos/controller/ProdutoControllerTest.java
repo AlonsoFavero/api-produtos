@@ -44,10 +44,17 @@ public class ProdutoControllerTest {
     void deveBuscarProdutoId() throws Exception{
 
         mockMvc.perform(
-                get("/produtos/1")
-        )
+                        post("/produtos")
+                                .contentType("application/json")
+                                .content("{\"nome\":\"Mouse\",\"preco\":100,\"quantidade\":5}")
+                );
+
+        mockMvc.perform(
+                        get("/produtos/1")
+                )
                 .andExpect(
                         status().isOk()
                 );
+
     }
 }
