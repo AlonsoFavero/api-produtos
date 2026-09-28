@@ -6,10 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
 @SpringBootTest
@@ -56,5 +54,24 @@ public class ProdutoControllerTest {
                         status().isOk()
                 );
 
+    }
+
+    @Test
+    void deveAtualizarProduto() throws Exception{
+
+        mockMvc.perform(
+                post("/produtos")
+                        .contentType("application/json")
+                        .content("{\"nome\":\"Mouse\",\"preco\":100,\"quantidade\":5}")
+        );
+
+        mockMvc.perform(
+                        put("/produtos/1")
+                                .contentType("application/json")
+                                .content("{\"nome\":\"Mouse\",\"preco\":100,\"quantidade\":5}")
+                )
+                .andExpect(
+                        status().isOk()
+                );
     }
 }
