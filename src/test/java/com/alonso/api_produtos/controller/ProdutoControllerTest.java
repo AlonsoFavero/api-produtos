@@ -158,4 +158,29 @@ public class ProdutoControllerTest {
                 status().isBadRequest()
         );
     }
+
+    @Test
+    void deveRetornar400AoAtualizarProdutoSemNome() throws Exception{
+
+        ResultActions resultado = mockMvc.perform(
+                post("/produtos")
+                        .contentType("application/json")
+                        .content("{\"nome\":\"Teclado\",\"preco\":100,\"quantidade\":5}")
+        );
+
+        String resposta = resultado.andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ProdutoResponseDTO produto =
+                objectMapper.readValue(resposta, ProdutoResponseDTO.class);
+
+        mockMvc.perform(
+                put("/produtos/" + produto.getId())
+                        .contentType("application/json")
+                        .content("{\"preco\":200,\"quantidade\":10}")
+        ).andExpect(
+                status().isBadRequest()
+        );
+    }
 }
