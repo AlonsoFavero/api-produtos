@@ -111,4 +111,13 @@ public class ProdutoControllerTest {
                 status().isNoContent()
         );
     }
+
+    void deveRetornar404AoBuscarProdutoInexistente() throws Exception{
+
+        mockMvc.perform(
+                get("/produtos/" + 9999)
+        ).andExpect(
+                status().isNotFound()
+        );
+    }
 }
