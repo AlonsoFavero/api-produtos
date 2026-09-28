@@ -39,4 +39,15 @@ public class ProdutoControllerTest {
                         status().isCreated()
                 );
     }
+
+    @Test
+    void deveBuscarProdutoId() throws Exception{
+
+        mockMvc.perform(
+                get("/produtos/1")
+        )
+                .andExpect(
+                        status().isOk()
+                );
+    }
 }
