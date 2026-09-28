@@ -51,6 +51,10 @@ public class ProdutoResponseDTO {
         return id;
     }
 
+    public ProdutoResponseDTO(){
+
+    }
+
     public ProdutoResponseDTO(Produto produto){
 
         this.nome = produto.getNome();
