@@ -112,12 +112,26 @@ public class ProdutoControllerTest {
         );
     }
 
+    @Test
     void deveRetornar404AoBuscarProdutoInexistente() throws Exception{
 
         mockMvc.perform(
                 get("/produtos/" + 9999)
         ).andExpect(
                 status().isNotFound()
+        );
+    }
+
+    @Test
+    void deveRetornar400AoCriarProdutoSemNome() throws Exception{
+
+        mockMvc.perform(
+                post("/produtos")
+                        .contentType("application/json")
+                        .content("{\"preco\":100,\"quantidade\":5}")
+
+        ).andExpect(
+                status().isBadRequest()
         );
     }
 }
