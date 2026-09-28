@@ -4,12 +4,13 @@ import com.alonso.api_produtos.dto.ProdutoDTO;
 import com.alonso.api_produtos.dto.ProdutoResponseDTO;
 import com.alonso.api_produtos.model.Produto;
 import com.alonso.api_produtos.service.ProdutoService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
@@ -40,15 +41,12 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<ProdutoResponseDTO> listar(){
+    public Page<ProdutoResponseDTO> listar(Pageable pageable){
 
-        List<Produto> produto = produtoService.listar();
+        Page<Produto> produtos = produtoService.listar(pageable);
 
-        List<ProdutoResponseDTO> produtosDTO = produto.stream()
-         .map(produtos -> new ProdutoResponseDTO(produtos))
-                .toList();
+        return produtos.map(produto -> new ProdutoResponseDTO(produto));
 
-        return produtosDTO;
     }
 
     @GetMapping("/{id}")
