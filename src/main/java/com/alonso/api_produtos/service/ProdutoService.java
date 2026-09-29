@@ -6,6 +6,7 @@ import com.alonso.api_produtos.repository.ProdutoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class ProdutoService {
@@ -22,8 +23,8 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public Page<Produto> listar(Pageable pageable) {
-        return produtoRepository.findAll(pageable);
+    public Page<Produto> listar(String nome , Pageable pageable) {
+        return produtoRepository.findByNomeContainingIgnoreCase( nome,pageable);
     }
 
     public Produto buscarPorId(Long id){

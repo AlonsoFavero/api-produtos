@@ -41,9 +41,9 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public Page<ProdutoResponseDTO> listar(Pageable pageable){
+    public Page<ProdutoResponseDTO> listar(@RequestParam String nome, Pageable pageable){
 
-        Page<Produto> produtos = produtoService.listar(pageable);
+        Page<Produto> produtos = produtoService.listar(nome, pageable);
 
         return produtos.map(produto -> new ProdutoResponseDTO(produto));
 
