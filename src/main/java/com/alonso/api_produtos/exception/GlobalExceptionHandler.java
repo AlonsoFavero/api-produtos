@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 
@@ -25,12 +24,6 @@ public class GlobalExceptionHandler {
 
         }
         return ResponseEntity.badRequest().body(tratarErros);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<?> tratarNaoEncontrado(NoSuchElementException exception){
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto não encontrado");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -50,6 +43,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(produtoNotFoundException.getMessage());
     }
+
 }
 
 

@@ -166,5 +166,5 @@ Durante o desenvolvimento deste projeto foram aplicados conceitos importantes de
 
 Estudante de Análise e Desenvolvimento de Sistemas e desenvolvedor Backend Java em formação.
 
-* GitHub: [AlonsoFavero](https://github.com/AlonsoFavero)
-* LinkedIn: [Alonso Favero](https://www.linkedin.com/in/alonso-favero-filho-00a7163aa/)
+* GitHub: [Alonso Favero Filho](https://github.com/AlonsoFavero)
+* LinkedIn: [Alonso Favero Filho](https://www.linkedin.com/in/alonso-favero-filho-00a7163aa/)
