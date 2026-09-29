@@ -25,7 +25,8 @@ public class ProdutoControllerTest {
     @Test
     void deveListarProdutos() throws Exception {
 
-        mockMvc.perform(get("/produtos"))
+        mockMvc.perform(get("/produtos")
+                        .param("nome", ""))
                 .andExpect(status().isOk());
     }
 
@@ -181,6 +182,26 @@ public class ProdutoControllerTest {
                         .content("{\"preco\":200,\"quantidade\":10}")
         ).andExpect(
                 status().isBadRequest()
+        );
+    }
+
+    @Test
+    void deveFiltrarProdutosPorPreco() throws Exception{
+
+       mockMvc.perform(
+                post("/produtos")
+                        .contentType("application/json")
+                        .content("{\"nome\":\"Teclado\",\"preco\":100,\"quantidade\":5}")
+        );
+
+        mockMvc.perform(
+                get("/produtos/filtro-preco")
+                        .param("precoMin", "50")
+                        .param("precoMax", "200")
+                        .param("page", "0")
+                        .param("size", "10")
+        ).andExpect(
+                status().isOk()
         );
     }
 }
