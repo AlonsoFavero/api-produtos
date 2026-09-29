@@ -6,7 +6,8 @@ import com.alonso.api_produtos.repository.ProdutoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
 
 @Service
 public class ProdutoService {
@@ -48,5 +49,10 @@ public class ProdutoService {
         Produto produtoExcluido = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("produto não encontrado"));
 
          produtoRepository.delete(produtoExcluido);
+    }
+
+    public Page<Produto> filtroDePreco(BigDecimal precoMin, BigDecimal precoMax, Pageable pageable){
+
+        return produtoRepository.findByPrecoGreaterThanEqualAndPrecoLessThanEqual(precoMin,precoMax,pageable);
     }
 }

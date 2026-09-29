@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping("/produtos")
@@ -18,14 +20,14 @@ public class ProdutoController {
 
     ProdutoService produtoService;
 
-    public ProdutoController(ProdutoService produtoService){
+    public ProdutoController(ProdutoService produtoService) {
 
         this.produtoService = produtoService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProdutoResponseDTO criar (@Valid @RequestBody ProdutoDTO produtoDTO){
+    public ProdutoResponseDTO criar(@Valid @RequestBody ProdutoDTO produtoDTO) {
 
         Produto produto = new Produto(
                 produtoDTO.getNome(),
@@ -41,7 +43,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public Page<ProdutoResponseDTO> listar(@RequestParam String nome, Pageable pageable){
+    public Page<ProdutoResponseDTO> listar(@RequestParam String nome, Pageable pageable) {
 
         Page<Produto> produtos = produtoService.listar(nome, pageable);
 
@@ -49,8 +51,20 @@ public class ProdutoController {
 
     }
 
+    @GetMapping("/filtro-preco")
+    public Page<ProdutoResponseDTO> filtroDePreco(
+            @RequestParam BigDecimal precoMin,
+            @RequestParam BigDecimal precoMax,
+            Pageable pageable) {
+
+        Page<Produto> produtos =
+                produtoService.filtroDePreco(precoMin, precoMax, pageable);
+
+        return produtos.map(produto -> new ProdutoResponseDTO(produto));
+    }
+
     @GetMapping("/{id}")
-    public ProdutoResponseDTO buscarPorId(@PathVariable Long id){
+    public ProdutoResponseDTO buscarPorId(@PathVariable Long id) {
 
         Produto produto = produtoService.buscarPorId(id);
 
@@ -60,7 +74,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ProdutoResponseDTO atualizar(@PathVariable Long id,@Valid @RequestBody ProdutoDTO produtoDTO){
+    public ProdutoResponseDTO atualizar(@PathVariable Long id, @Valid @RequestBody ProdutoDTO produtoDTO) {
 
         Produto produto = new Produto(
 
@@ -78,10 +92,12 @@ public class ProdutoController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> excluir (@PathVariable Long id){
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
         produtoService.excluir(id);
 
-       return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
+
+
 }
